@@ -1,0 +1,28 @@
+from PIL import Image
+
+def apply_sticker(image_path, sticker_path, output_path):
+    # Open the main image
+    main_image = Image.open(image_path).convert("RGBA")
+
+    # Open the sticker image
+    sticker_image = Image.open(sticker_path).convert("RGBA")
+
+    # Resize the sticker image to a desired size
+    sticker_size = (100, 100)  # Adjust the size as per your requirement
+    sticker_image = sticker_image.resize(sticker_size)
+
+    # Calculate the position to place the sticker (top-right corner in this example)
+    sticker_position = (main_image.size[0] - sticker_size[0], 0)
+
+    # Apply the sticker onto the main image
+    main_image.paste(sticker_image, sticker_position, sticker_image)
+
+    # Save the final image
+    main_image.save(output_path)
+
+if __name__ == "__main__":
+    image_path = "main_image.jpg"  # Replace with the path to your main image
+    sticker_path = "sticker.png"  # Replace with the path to your sticker image
+    output_path = "output_image.jpg"  # Replace with the desired output path
+
+    apply_sticker(image_path, sticker_path, output_path)
